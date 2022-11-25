@@ -1,0 +1,17 @@
+<form>
+  <div class="mb-3">
+    <label for="login" class="form-label">Email</label>
+    <input type="email" class="form-control" id="login" #email="ngModel"  name ="login" [(ngModel)]="usuario.login" placeholder="Informe o email" required>
+    <span *ngIf="email.invalid"></span>
+  </div>
+  <div class="mb-3">
+    <label for="senha" class="form-label">Password</label>
+    <input type="password" class="form-control" id="senha" #senha="ngModel"  name ="senha" [(ngModel)]="usuario.senha" placeholder="Informe a senha" required>
+    <span *ngIf="senha.invalid">
+
+    </span>
+  </div>
+
+  <button type="button" class="btn btn-primary" [disabled]="email.invalid || senha.invalid"  (click)="acessar()">Acessar</button>
+  <button type="button" id="btnrecuperar" class="btn " [disabled]="email.invalid "  (click)="recuperar()">Recuperar Acesso</button>
+</form>

@@ -1,0 +1,137 @@
+<br>
+<main>
+  <button type="button" class="btn btn-secondary" [routerLink]="['/listausuarios']"
+    routerLinkActive="router-link-active">Voltar</button>
+  <h3>Cadastro de Usuário</h3>
+
+  <div class="mb-3" id="botoes">
+    <button class="btn btn-light" (click)="novo()">Novo</button>
+  </div>
+
+
+  <form class="mb-3 row" #formValidate="ngForm">
+
+    <div class="mb-3">
+      <div class="form-group col-md-1">
+        <label for="id">ID:</label>
+        <input type="text" class="form-control" [(ngModel)]="user.id" id="id" name="id" readonly autocomplete="false">
+      </div>
+    </div>
+    <br>
+    <div class="mb-3">
+      <div class="form-group col-md-12">
+        <label for="nome">Nome:</label>
+        <span *ngIf="nomeValidate.invalid"> *</span>
+        <input type="text" class="form-control" #nomeValidate="ngModel" [(ngModel)]="user.nome" id="nome" name="nome"
+          autocomplete="false" required>
+      </div>
+    </div>
+
+    <div class=" row g-3 mb-3">
+      <div class="form-group col-md-3">
+        <label for="dataNascimento">Data de Nasc.</label>
+        <span *ngIf="dataNas.invalid"> *</span>
+        <div class="input-group">
+          <input type="text" class="form-control" name="dataNascimento" id="dataNascimento"
+            [(ngModel)]="user.dataNascimento" #dataNas="ngModel" placeholder="dd/mm/yyyy" ngbDatepicker
+            #dataNascimento="ngbDatepicker" required="true">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-primary" (click)="dataNascimento.toggle()"></button>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="dataNascimento">Profissoes</label>
+        <span *ngIf="profissaoValidade.invalid"> *</span>
+
+        <select class="form-select" [(ngModel)]="user.profissao.id" id="profissao" name="profissao"
+          #profissaoValidade="ngModel">
+          <option selected disabled>[SELECIONE]</option>
+          <option [ngValue]="p.id" *ngFor="let p of profissoes">{{p.descricao}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="salario">Salário</label>
+        <span *ngIf="salarioValidade.invalid"> *</span>
+        <input type="text" class="form-control" #salarioValidade="ngModel" id="salario" name="salario"
+          [(ngModel)]="user.salario" currencyMask [options]="{prefix:'R$', thousands: '.', decimal: ',' }" >
+
+      </div>
+    </div>
+
+
+
+
+    <div class="row g-3">
+      <div class="form-group col-md-6">
+        <label for="login">Login:</label>
+        <span *ngIf="loginValidate.invalid"> *</span>
+        <input type="text" class="form-control" #loginValidate="ngModel" [(ngModel)]="user.login" id="login"
+          name="login" autocomplete="false" required>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="senha">Senha:</label>
+        <span *ngIf="senhaValidate.invalid"> *</span>
+        <input type="password" class="form-control" #senhaValidate="ngModel" [(ngModel)]="user.senha" id="senha"
+          name="senha" autocomplete="false" required>
+      </div>
+
+
+
+    </div>
+    <div class="container" style="padding: 10px ;">
+      <div class="card">
+        <div class="card-body">
+          Telefone para Contato
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="numero" class="form-label">Número</label>
+      <input type="text" mask="(00) 0 0000-0000" class="form-control" id="numero" name="numero"
+        [(ngModel)]="telefone.numero">
+    </div>
+
+    <div class="col-md-2">
+
+      <button class="btn btn-primary" (click)="AddFone()">Adiconar</button>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Número</th>
+
+          <th scope="col">Excluir</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let fone of user.telefones; let i = index">
+
+          <td>{{fone.id}}</td>
+          <td>{{fone.numero | mask:'(00)0 0000-0000'}}</td>
+
+          <td><button class="btn btn-danger" (click)="deletarTelefone(fone.id, i)">Delete</button></td>
+        </tr>
+      </tbody>
+
+
+    </table>
+
+
+    <div class="mb-3">
+      <br>
+      <button type="button" class="btn btn-success" [disabled]="formValidate.invalid"
+        (click)="salvarUsuario()">Salvar</button>
+    </div>
+
+  </form>
+</main>

@@ -1,0 +1,58 @@
+<h3>Relatório de Usuário</h3>
+
+<form class=" row g-3 mb-3 " #formValidate="ngForm">
+
+
+  <div class="col-md-4">
+    <label for="dataInicio">Data Início</label>
+    <span *ngIf="dataIn.invalid"> *</span>
+    <div class="input-group">
+      <input type="text" class="form-control" name="dataInicio" id="dataInicio" [(ngModel)]=" userReport.dataInicio"
+        #dataIn="ngModel" placeholder="dd/mm/yyyy" ngbDatepicker #dataInicio="ngbDatepicker" required="true">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" (click)="dataInicio.toggle()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="dataInicio">Data Fim</label>
+    <span *ngIf="dataF.invalid"> *</span>
+    <div class="input-group">
+      <input type="text" class="form-control" name="dataFim" id="dataFim" [(ngModel)]=" userReport.dataFim"
+        #dataF="ngModel" placeholder="dd/mm/yyyy" ngbDatepicker #dataFinal="ngbDatepicker" required="true">
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" (click)="dataFinal.toggle()"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 ">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRel"
+      (click)="imprimeRelatorio()">
+      Imprimr Relatório
+    </button>
+
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalRel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <iframe id="pdf" [frameBorder]="0"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

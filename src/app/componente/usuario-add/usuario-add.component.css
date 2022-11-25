@@ -1,0 +1,28 @@
+form, h3{
+  padding: 10px;
+}
+
+.btn-light{
+  background-color:  	#00BFFF;
+  color: white;
+  font-weight: bolder;
+}
+
+span{
+  color: red;
+  font-size: 23px;
+}
+
+.card{
+  background-color:darkcyan;
+  color:black;
+  text-align: center;
+  text-decoration: none;
+  font:arial;
+  font-size: 1.5 rem;
+  font-weight: bold;
+}
+
+main{
+  margin: auto;
+}
